@@ -4,6 +4,9 @@
 
 package com.yandex.kbelyako;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -117,11 +120,39 @@ testGroup.rmvStudent(5);
 testGroup.toStringTable();
 testGroup.sortByParam(3);
 testGroup.sortByParam(-83);
-testGroup.addstudentInteractive(5);
+//testGroup.addstudentInteractive(5);
 testGroup.toStringTable();
 
 
 testGroup.getMilReadyStudents();
+
+
+
+/*try (PrintWriter a = new PrintWriter("test1.txt")) {
+	
+	testGroup.toString();
+
+	a.print(testGroup.toString());
+	a.println("Black Rabbit");
+	a.println("Green Lamp");
+} catch (FileNotFoundException e) {
+	System.out.println("ERROR FILE WRITE");
+}
+*/
+testGroup.saveToFile();
+File test1 = new File("test1.txt");
+
+System.out.println(student10.toStringToFile());
+
+System.out.println(Group.FiletoString(test1));
+String[] array4 = Group.FiletoString(test1).split(";");
+System.out.println(Arrays.toString(array4));
+for (int i = 0; i < array4.length; i++) {
+	String[] studentArr = array4[i].split(" ");
+	System.out.println(studentArr[i]);
+	
+	
+}
 
 	}
 

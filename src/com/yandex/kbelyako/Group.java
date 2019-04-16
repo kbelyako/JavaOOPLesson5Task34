@@ -1,5 +1,11 @@
 package com.yandex.kbelyako;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Scanner;
@@ -269,5 +275,40 @@ public class Group implements Comparator<Human>, Military {
 		System.out.println(Arrays.toString(fresult));
 		return fresult;
 	}
+	
+	public void saveToFile() {
+		
+			try (PrintWriter a = new PrintWriter("test1.txt")) {
+				for (int i = 0; i < group1.length; i++) {
+			if (group1[i]==null) a.println(); else a.println(group1[i].toStringToFile());
+			//	a.println("Green Lamp");
+				}
+			} catch (FileNotFoundException e) {
+				System.out.println("ERROR FILE WRITE");
+			}
+		
+		
+	}
+	
+	public static String FiletoString(File f) {
+		String [] strinArray = new String [10]; 
+		String str2 = "";
+		try (BufferedReader br = new BufferedReader(new FileReader(f))) {
+			String str1 = "";
+			for (; (str1 = br.readLine()) != null;) {
+				if (str2 != "")
+					str2 = str2 + ";" + str1;
+				else
+					str2 = str2 + str1;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			// System.out.println("ERROR");
+		}
+		return str2;
+
+	}
+	
+	
 
 }

@@ -28,6 +28,15 @@ public class Student extends Human {
 	@Override
 	public String toString() {
 		return "Student [toString()=" + super.toString() + "]";
+		
+			}
+
+	@Override
+	public String toStringToFile() {
+		// TODO Auto-generated method stub
+		return super.toStringToFile();
 	}
+	
+	
 
 }

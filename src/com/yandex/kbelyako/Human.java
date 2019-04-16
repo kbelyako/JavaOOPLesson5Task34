@@ -107,6 +107,10 @@ public class Human implements Comparable {
 		return "Human [fName=" + fName + ", patronymic=" + patronymic + ", lName=" + lName + ", age=" + age + ", sex="
 				+ sex + "]";
 	}
+	
+	public String toStringToFile() {
+		return fName+" "+patronymic+" "+lName+" "+age+" "+sex;
+	}
 
 
 
