@@ -33,6 +33,7 @@ public class Main {
 		
 		Student student3 = new Student("Vasiliy", "Aleksandrovich", "Arbuzov",
 				19, "male");
+		student3.setfName("Alex");
 		Student student4 = new Student("Aleksey", "Olegovich", "Vasiliyev", 19,
 				"male");
 		Student student5 = new Student("Dmitri", "Ivanovich", "Ivanov", 18,
@@ -139,6 +140,7 @@ testGroup.getMilReadyStudents();
 	System.out.println("ERROR FILE WRITE");
 }
 */
+testGroup.addstudent(student3, 3);
 testGroup.saveToFile();
 File test1 = new File("test1.txt");
 
@@ -147,13 +149,21 @@ System.out.println(student10.toStringToFile());
 System.out.println(Group.FiletoString(test1));
 String[] array4 = Group.FiletoString(test1).split(";");
 System.out.println(Arrays.toString(array4));
-for (int i = 0; i < array4.length; i++) {
-	String[] studentArr = array4[i].split(" ");
-	System.out.println(studentArr[i]);
-	
-	
-}
+Group  groupFromFile = new Group();
+String line="Aleksey Olegovich Vasiliyev 19 male";
+groupFromFile.addstudent(Group.studentFromString(line), 2);
+String line1="Vlad Olegovich Vasiliyev 19 male";
 
+groupFromFile.addstudent(Group.studentFromString(line), 1);
+String line3="";
+groupFromFile.addstudent(Group.studentFromString(line), 2);
+
+for (int i = 0; i < array4.length; i++) {
+	groupFromFile.addstudent(Group.studentFromString(array4[i]), i+1);
+//	
+	}
+System.out.println("from file:");
+System.out.println(groupFromFile.toString());
 	}
 
 }

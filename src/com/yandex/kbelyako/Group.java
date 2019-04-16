@@ -275,23 +275,25 @@ public class Group implements Comparator<Human>, Military {
 		System.out.println(Arrays.toString(fresult));
 		return fresult;
 	}
-	
+
 	public void saveToFile() {
-		
-			try (PrintWriter a = new PrintWriter("test1.txt")) {
-				for (int i = 0; i < group1.length; i++) {
-			if (group1[i]==null) a.println(); else a.println(group1[i].toStringToFile());
-			//	a.println("Green Lamp");
-				}
-			} catch (FileNotFoundException e) {
-				System.out.println("ERROR FILE WRITE");
+
+		try (PrintWriter a = new PrintWriter("test1.txt")) {
+			for (int i = 0; i < group1.length; i++) {
+				if (group1[i] == null)
+					a.println();
+				else
+					a.println(group1[i].toStringToFile());
+				// a.println("Green Lamp");
 			}
-		
-		
+		} catch (FileNotFoundException e) {
+			System.out.println("ERROR FILE WRITE");
+		}
+
 	}
-	
+
 	public static String FiletoString(File f) {
-		String [] strinArray = new String [10]; 
+		String[] strinArray = new String[10];
 		String str2 = "";
 		try (BufferedReader br = new BufferedReader(new FileReader(f))) {
 			String str1 = "";
@@ -308,7 +310,25 @@ public class Group implements Comparator<Human>, Military {
 		return str2;
 
 	}
-	
-	
+
+	public static Student studentFromString(String line) {
+	// Student student = null;
+		Student student = new Student("Olga", "Petrovna", "Romashkina", 19,"female");
+
+		if (line != "") {
+			String[] parametrs = line.split(" ");
+			System.out.println(Arrays.toString(parametrs));
+			//System.out.println(parametrs[0]);
+			student.setfName(parametrs[0]);
+			
+			System.out.println(student.getfName());
+			student.setlNname(parametrs[2]);
+			student.setPatronymic(parametrs[1]);
+			student.setSex(parametrs[4]);
+			student.setAge(Integer.parseInt(parametrs[3]));
+		} else student=null;
+
+		return student;
+	}
 
 }
