@@ -23,6 +23,11 @@ public class Group implements Comparator<Human>, Military {
 		return group1;
 	}
 
+	public Group(String name) {
+		super();
+		this.name = name;
+	}
+
 	public void setGroup1(Student[] group1) {
 		this.group1 = group1;
 	}
@@ -30,6 +35,18 @@ public class Group implements Comparator<Human>, Military {
 	public Group(Student[] group1) {
 		super();
 		this.group1 = group1;
+	}
+
+	private String name;
+	
+	
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String toStringSorted() {
@@ -45,7 +62,7 @@ public class Group implements Comparator<Human>, Military {
 	}
 
 	public void toStringTable() {
-
+		System.out.println("Group name: "+getName());
 		for (int i = 0; i <= 9; i++) {
 			System.out.println(i + 1 + " " + group1[i]);
 
@@ -68,8 +85,10 @@ public class Group implements Comparator<Human>, Military {
 			if (group1[i - 1] == null) {
 				group1[i - 1] = student;
 			} else
-				System.out.println("Position " + i
-						+ " is already busy in this group, please delete student from this position first or try to add student to another position");
+				System.out
+						.println("Position "
+								+ i
+								+ " is already busy in this group, please delete student from this position first or try to add student to another position");
 
 		}
 	}
@@ -106,8 +125,10 @@ public class Group implements Comparator<Human>, Military {
 			if (group1[i - 1] == null) {
 				group1[i - 1] = newStudent;
 			} else
-				System.out.println("Position " + i
-						+ " is already busy in this group, please delete student from this position first or try to add student to another position");
+				System.out
+						.println("Position "
+								+ i
+								+ " is already busy in this group, please delete student from this position first or try to add student to another position");
 
 		}
 	}
@@ -117,11 +138,13 @@ public class Group implements Comparator<Human>, Military {
 			if (group1[i - 1] != null) {
 				group1[i - 1] = null;
 			} else
-				System.out.println("Position " + i + " is already empty in this group");
+				System.out.println("Position " + i
+						+ " is already empty in this group");
 
 		} catch (ArrayIndexOutOfBoundsException e) {
 
-			System.out.println("Not possible to delete student from this position, because it's out of range 1..10");
+			System.out
+					.println("Not possible to delete student from this position, because it's out of range 1..10");
 		}
 	}
 
@@ -157,7 +180,8 @@ public class Group implements Comparator<Human>, Military {
 			isSorted = true;
 			for (int i = 0; i < groupNew.length - 1; i++) {
 				if ((groupNew[i] != null) && (groupNew[i + 1] != null)) {
-					if (groupNew[i].getlName().charAt(0) > groupNew[i + 1].getlName().charAt(0)) {
+					if (groupNew[i].getlName().charAt(0) > groupNew[i + 1]
+							.getlName().charAt(0)) {
 						isSorted = false;
 						buf = groupNew[i];
 						groupNew[i] = groupNew[i + 1];
@@ -234,7 +258,8 @@ public class Group implements Comparator<Human>, Military {
 
 		}
 		if (result == null) {
-			strResult = strResult + (char) 0x0D + "No such student in this group";
+			strResult = strResult + (char) 0x0D
+					+ "No such student in this group";
 		}
 		return strResult;
 
@@ -277,8 +302,17 @@ public class Group implements Comparator<Human>, Military {
 	}
 
 	public void saveToFile() {
-
-		try (PrintWriter a = new PrintWriter("test1.txt")) {
+		 System.out.println("THIS NAME "+getName());
+		 String fileName="";
+		 Scanner in = new Scanner(System.in);
+		 if (getName()==null) 
+		 {
+			 System.out.print("Group has no name, please enter group name: ");
+			 fileName=(in.next());
+				setName(fileName);
+		 } else fileName=(getName());
+		 
+          		try (PrintWriter a = new PrintWriter(fileName+".txt")) {
 			for (int i = 0; i < group1.length; i++) {
 				if (group1[i] == null)
 					a.println();
@@ -311,24 +345,67 @@ public class Group implements Comparator<Human>, Military {
 
 	}
 
-	public static Student studentFromString(String line) {
-	// Student student = null;
-		Student student = new Student("Olga", "Petrovna", "Romashkina", 19,"female");
+	public static Student studentFromString(String inputString) {
 
-		if (line != "") {
-			String[] parametrs = line.split(" ");
-			System.out.println(Arrays.toString(parametrs));
-			//System.out.println(parametrs[0]);
-			student.setfName(parametrs[0]);
+		Student student = new Student("Dummy", "Dummy", "Dummy", 19, "Dummy");
+
+		if (inputString != "") {
+			String[] parametrs = inputString.split(" ");
 			
-			System.out.println(student.getfName());
+			student.setfName(parametrs[0]);
 			student.setlNname(parametrs[2]);
 			student.setPatronymic(parametrs[1]);
 			student.setSex(parametrs[4]);
 			student.setAge(Integer.parseInt(parametrs[3]));
-		} else student=null;
+		} else
+			student = null;
 
 		return student;
 	}
+	
+	public static Group groupFromString(String inputString) {
+		Group resGroup=new Group();
+		String[] array = inputString.split(";");
+		//System.out.println("Array: "+Arrays.toString(array));
+		for (int i = 0; i < array.length; i++) {
+			if (array[i].equals("") ) continue;
+			else {
+			//System.out.println("Начинаю парсить позицию:"+" "+i+" "+array[i]);
+			resGroup.addstudent(Group.studentFromString(array[i]), i+1);}
+		//	
+			}
+		return resGroup;
+	}
+	
+	public static Group loadGroup(File inputFile) {
+		Group resGroup=new Group();
+		
+		resGroup=Group.groupFromString(Group.FiletoString(inputFile));
+		resGroup.setName(stripExtension(inputFile.getName()));
+		return resGroup;
+	}
+	
+	static String stripExtension (String str) {
+        // Handle null case specially.
+
+        if (str == null) return null;
+
+        // Get position of last '.'.
+
+        int pos = str.lastIndexOf(".");
+
+        // If there wasn't any '.' just return the string as is.
+
+        if (pos == -1) return str;
+
+        // Otherwise return the string, up to the dot.
+
+        return str.substring(0, pos);
+	
+	}
+	
+	
+	
+	
 
 }

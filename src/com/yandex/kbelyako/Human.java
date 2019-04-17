@@ -7,13 +7,12 @@ public class Human implements Comparable {
 	private String fName;
 	private String patronymic;
 	private String lName;
-	
+
 	private int age;
 	private String sex;
 
-
-
-	public Human(String fName, String patronymic, String lName, int age, String sex) {
+	public Human(String fName, String patronymic, String lName, int age,
+			String sex) {
 		super();
 		this.fName = fName;
 		this.patronymic = patronymic;
@@ -31,16 +30,16 @@ public class Human implements Comparable {
 		return fName;
 	}
 
-	public void setfName(String fName)  {
+	public void setfName(String fName) {
 		if (fName.matches("[a-zA-Z]+")) {
-			if (fName.length()>=2) {
-				this.fName = fName;	
-			} else throw new IllegalArgumentException ("To short");
-			
-		} else throw new IllegalArgumentException ("You enter unacceptable char");
-		
-		
-		
+			if (fName.length() >= 2) {
+				this.fName = fName;
+			} else
+				throw new IllegalArgumentException("To short");
+
+		} else
+			throw new IllegalArgumentException("You enter unacceptable char");
+
 	}
 
 	public String getlName() {
@@ -49,8 +48,9 @@ public class Human implements Comparable {
 
 	public void setlNname(String lName) {
 		if (lName.matches("[a-zA-Z]+")) {
-		this.lName = lName;
-		} else throw new IllegalArgumentException ("You enter unacceptable char");
+			this.lName = lName;
+		} else
+			throw new IllegalArgumentException("You enter unacceptable char");
 	}
 
 	public String getPatronymic() {
@@ -59,8 +59,9 @@ public class Human implements Comparable {
 
 	public void setPatronymic(String patronymic) {
 		if (patronymic.matches("[a-zA-Z]+")) {
-		this.patronymic = patronymic;
-	} else throw new IllegalArgumentException ("You enter unacceptable char");
+			this.patronymic = patronymic;
+		} else
+			throw new IllegalArgumentException("You enter unacceptable char");
 	}
 
 	public int getAge() {
@@ -68,10 +69,11 @@ public class Human implements Comparable {
 	}
 
 	public void setAge(int age) {
-		if (age>16) {
-			this.age = age;	
-		} else throw new IllegalArgumentException ("Impossible age");
-		
+		if (age > 16) {
+			this.age = age;
+		} else
+			throw new IllegalArgumentException("Impossible age");
+
 	}
 
 	public String getSex() {
@@ -79,41 +81,37 @@ public class Human implements Comparable {
 	}
 
 	public void setSex(String sex) {
-		System.out.println(sex);
-		if (sex.matches("male") || sex.matches("Male")||sex.matches("MALE")||sex.matches("female") ||sex.matches("Female") ||sex.matches("FEMALE")) {
-			this.sex = sex;	
-		} else throw new IllegalArgumentException ("Impossible sex");
-		
+		if (sex.matches("male") || sex.matches("Male") || sex.matches("MALE")
+				|| sex.matches("female") || sex.matches("Female")
+				|| sex.matches("FEMALE")) {
+			this.sex = sex;
+		} else
+			throw new IllegalArgumentException("Impossible sex");
+
 	}
-	
-	
+
 	@Override
 	public int compareTo(Object o) {
-		
-		if (o == null) {			
-			//System.out.println("I found null");
+
+		if (o == null) {
+			// System.out.println("I found null");
 			return -1;
-			}
-		
-			Human person = (Human) o;
-			
-			
-			return this.lName.compareToIgnoreCase(person.getlName());
-			
+		}
+
+		Human person = (Human) o;
+
+		return this.lName.compareToIgnoreCase(person.getlName());
+
 	}
 
 	@Override
 	public String toString() {
-		return "Human [fName=" + fName + ", patronymic=" + patronymic + ", lName=" + lName + ", age=" + age + ", sex="
-				+ sex + "]";
+		return "Human [fName=" + fName + ", patronymic=" + patronymic
+				+ ", lName=" + lName + ", age=" + age + ", sex=" + sex + "]";
 	}
-	
+
 	public String toStringToFile() {
-		return fName+" "+patronymic+" "+lName+" "+age+" "+sex;
+		return fName + " " + patronymic + " " + lName + " " + age + " " + sex;
 	}
-
-
-
-	
 
 }

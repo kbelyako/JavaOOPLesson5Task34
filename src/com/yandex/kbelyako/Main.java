@@ -126,44 +126,48 @@ testGroup.toStringTable();
 
 
 testGroup.getMilReadyStudents();
-
-
-
-/*try (PrintWriter a = new PrintWriter("test1.txt")) {
-	
-	testGroup.toString();
-
-	a.print(testGroup.toString());
-	a.println("Black Rabbit");
-	a.println("Green Lamp");
-} catch (FileNotFoundException e) {
-	System.out.println("ERROR FILE WRITE");
-}
-*/
+testGroup.getClass();
+System.out.println(testGroup.getClass());
 testGroup.addstudent(student3, 3);
-testGroup.saveToFile();
+System.out.println("Test Group before save to file: ");
+testGroup.toStringTable();
+//testGroup.saveToFile();
 File test1 = new File("test1.txt");
-
+File test2 = new File("test2.txt");
 System.out.println(student10.toStringToFile());
 
-System.out.println(Group.FiletoString(test1));
-String[] array4 = Group.FiletoString(test1).split(";");
-System.out.println(Arrays.toString(array4));
-Group  groupFromFile = new Group();
-String line="Aleksey Olegovich Vasiliyev 19 male";
-groupFromFile.addstudent(Group.studentFromString(line), 2);
-String line1="Vlad Olegovich Vasiliyev 19 male";
+System.out.println("File to string test1: "+Group.FiletoString(test1));
 
-groupFromFile.addstudent(Group.studentFromString(line), 1);
+System.out.println("*****");
+
+
+Group  groupFromFile = new Group("GroupfromFile");
+System.out.println("Name of group from file: "+groupFromFile.getName());
+
+//String line="Aleksey Olegovich Vasiliyev 19 male";
+//groupFromFile.addstudent(Group.studentFromString(line), 5);
+//String line1="Vlad Olegovich Vasiliyev 19 male";
+
+//groupFromFile.addstudent(Group.studentFromString(line), 1);
 String line3="";
-groupFromFile.addstudent(Group.studentFromString(line), 2);
 
-for (int i = 0; i < array4.length; i++) {
-	groupFromFile.addstudent(Group.studentFromString(array4[i]), i+1);
-//	
-	}
+
+groupFromFile=Group.groupFromString(Group.FiletoString(test1));
+groupFromFile.setName("GR_FromFile");
+
 System.out.println("from file:");
 System.out.println(groupFromFile.toString());
+groupFromFile.toStringTable();
+
+System.out.println(testGroup.getName());
+System.out.println(groupFromFile.getName());
+groupFromFile.saveToFile();
+
+Group  groupFromFile1 = new Group("GroupfromFile1");
+File t = new File("4444.txt");
+groupFromFile1=Group.loadGroup(t);
+groupFromFile1.toStringTable();
+
 	}
 
 }
